@@ -2,17 +2,17 @@
 
 Este proyecto ejecuta un programa que elabora una presentación sobre algunos resultados de la [Encuesta Nacional de Seguridad Pública Urbana (ENSU)](https://www.inegi.org.mx/programas/ensu/#documentacion) y carga la presentación en una carpeta de google drive. Puedes ver un ejemplo finalizado [aquí](https://docs.google.com/presentation/d/18X1CarY2thss_xejGXzYA8d-IzWHnKoQ/edit?usp=sharing&ouid=102821055360325180838&rtpof=true&sd=true)
 
-# Presentación 💡
+# Presentación 
 
 El objetivo de la presentación es mostrar en un reporte claro y comprensible para personas que quieren conocer:
 
-a. la percepción de inseguridad en donde viven
-b. los 5 principales problemas principales que perciben
-c. la percepción de efectividad con la que sus gobiernos solucionan esos problemas
+- a. la percepción de inseguridad en donde viven
+- b. los 5 principales problemas principales que perciben
+- c. la percepción de efectividad con la que sus gobiernos solucionan esos problemas
 
 ## Estructura de la presentación
 
-Se tiene la siguiente estructura en todas las diapositivas con la finalida de que el poducto sea homogéneo y poder reutilizar diversos componentes como iconos y conjuntos de datos.
+Se tiene la siguiente estructura en todas las diapositivas con la finalida de que el producto sea homogéneo y poder reutilizar diversos componentes como los iconos y conjuntos de datos.
 
 ![alt text](auxiliares/imagenes/diapo_ejemplo.png)
 
@@ -93,6 +93,6 @@ Hay al menos dos opciones:
 Caso 1. Puedes generar una cuenta de servicio desde google cloud y generar tus llaves de acceso
 Caso 2. (El de este ejemplo) generas una aplicación de escritorio en google cloud y le das permiso a la cuenta desde la que vayas a subir tus archivos como 'tester' para que te permita el acceso a una carpeta de drive. 
 
-Descarga las credenciales en formato *.json y coloca en la ruta `auxiliares/credenciales`, no te preocupes esta carpeta está indicada en el `.gitignore` para que no se suba si modificas algún cambio. Debes tener identificada la carpeta de google drive a la cuál vas a subir tu pptx es algo como https://drive.google.com/drive/u/2/folders/1abcdefg123445 toma la última parte de la cadena y la debes colocar en el archivo .env, te dejo un .env_ejemplo.
+Descarga las credenciales en formato *.json y coloca en la ruta `auxiliares/credenciales`, no te preocupes esta carpeta está indicada en el `.gitignore` para que no se suba si modificas algún cambio. Debes tener identificada la carpeta de google drive a la cuál vas a subir tu pptx es algo como `drive.google.com/drive/..../1abcdefg123445` toma la última parte de la cadena y la debes colocar en el archivo .env, te dejo un .env_ejemplo.
 
-# Gracias.
+# Gracias :)
