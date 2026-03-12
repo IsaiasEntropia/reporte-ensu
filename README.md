@@ -14,12 +14,12 @@ c. la percepción de efectividad con la que sus gobiernos solucionan esos proble
 
 Se tiene la siguiente estructura en todas las diapositivas con la finalida de que el poducto sea homogéneo y poder reutilizar diversos componentes como iconos y conjuntos de datos.
 
-![alt text](imagenes/diapo_ejemplo.png)
+![alt text](auxiliares/imagenes/diapo_ejemplo.png)
 
 
 # Estructura del repositorio
 
-
+```text
 ├── auxiliares
 │   ├── credenciales
 │   ├── iconos
@@ -40,6 +40,7 @@ Se tiene la siguiente estructura en todas las diapositivas con la finalida de qu
 ├── README.md
 ├── requirements.txt
 └── salidas
+```
 
 - auxiliares: contiene las carpetas para colocar credenciales .json si se quiere subir la ppt a una carpeta de google drive; carpeta con iconos que se usan en la creación de la PPT, imagenes para el ejemplo del repositorio; plantillas que contiene la plantilla en pptx que utiliza el programa para renderizar cada vez el reporte.
 - datos: contiene los datos originales y los datos procesados
@@ -71,7 +72,7 @@ Los iconos cada uno de ellos tiene derechos de autor citados en la plantilla de 
 
 4. Carga un csv con los resultados de la ENSU con la siguiente estructura.
 
-![alt text](imagenes/df_ensu.png)
+![alt text](auxiliares/imagenes/df_ensu.png)
 
 Puedes auxiliarte puedes usar este repositorio de [Entropia](https://github.com/entropiacf/ensu-tabulados)
 
