@@ -1,2 +1,10 @@
 .venv
 __pycache__/
+
+/datos
+/salidas
+/auxiliares/credenciales
+
+.env
+.env.*
+!.env_ejemplo
