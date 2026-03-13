@@ -74,7 +74,7 @@ Los iconos cada uno de ellos tiene derechos de autor citados en la plantilla de 
 
 ![alt text](auxiliares/imagenes/df_ensu.png)
 
-Puedes auxiliarte puedes usar este repositorio de [Entropia](https://github.com/entropiacf/ensu-tabulados)
+Para tener los datos de la ENSU, puedes auxiliarte de este repositorio de [Entropía](https://github.com/entropiacf/ensu-tabulados)
 
 5. Procesamiento
 
@@ -83,16 +83,19 @@ Puedes auxiliarte puedes usar este repositorio de [Entropia](https://github.com/
 - `03_cargar_ppt.py` Si lo deseas, puedes cargar la ppt en una carpeta de google drive
 - `funciones.py` contiene las funciones como módulos para dar orden y limpieza al proyecto
 
+Aquí te dejo un dataset del Q4-2025 de la ENSU con el que puedes correr de inicio a fin el repositorio, [ver datos](https://drive.google.com/drive/folders/1_AEaBB-uYUzK5vv_kclyVppmDaFILYF0?usp=sharing)
+
+
 #### Si quieres cargar la presentación 
 
 Hay al menos dos opciones:
 
-1. Tú o tu organización cuenta con cuenta de gworks puedes generar una unidad compartida e ir por google cloud
-2. Tienes la cuenta gratuita y debes realziarlo por medio de una aplicación de google
+- 1. Tú o tu organización cuenta con cuenta de gworks puedes generar una unidad compartida e ir por google cloud
+- 2. Tienes la cuenta gratuita y debes realziarlo por medio de una aplicación de google
 
-Caso 1. Puedes generar una cuenta de servicio desde google cloud y generar tus llaves de acceso
-Caso 2. (El de este ejemplo) generas una aplicación de escritorio en google cloud y le das permiso a la cuenta desde la que vayas a subir tus archivos como 'tester' para que te permita el acceso a una carpeta de drive. 
+- Caso 1. Puedes generar una cuenta de servicio desde google cloud y generar tus llaves de acceso
+- Caso 2. (El de este ejemplo) generas una aplicación de escritorio en google cloud y le das permiso a la cuenta desde la que vayas a subir tus archivos como 'tester' para que te permita el acceso a una carpeta de drive. 
 
 Descarga las credenciales en formato *.json y coloca en la ruta `auxiliares/credenciales`, no te preocupes esta carpeta está indicada en el `.gitignore` para que no se suba si modificas algún cambio. Debes tener identificada la carpeta de google drive a la cuál vas a subir tu pptx es algo como `drive.google.com/drive/..../1abcdefg123445` toma la última parte de la cadena y la debes colocar en el archivo .env, te dejo un .env_ejemplo.
 
-# Gracias :)
+# Gracias 🥷🏾
