@@ -14,6 +14,7 @@ iconos_ruta = os.path.join("auxiliares/iconos/")
 
 df_top = pd.read_csv(df_ruta)
 
+
 # Eliminar las variables que no necesitamos en el top 
 df_long = df_top.copy()
 df_long = df_long.drop(columns=["nom_cd",
@@ -46,7 +47,13 @@ prob_icon = {
      'fallas_agua' : iconos_ruta +  'fallas_agua.png',
      'parque_desc' : iconos_ruta + 'parque.png' ,
      'trafico' : iconos_ruta + 'trafico.png' ,
-     'transporte_inef' : iconos_ruta + 'transporte-publico.png' }
+     'transporte_inef' : iconos_ruta + 'transporte-publico.png',
+     'hospital_saturado' : iconos_ruta + 'hospital.png',
+     'tx_aguas' : iconos_ruta + 'aguas-residuales.png',
+     'serv_limpia' : iconos_ruta + 'basura.png',
+     'mercados_mal': iconos_ruta + 'mercado.png',
+     'salud_rastro' : iconos_ruta + 'rastro.png'
+      }
 
 # Mapear los iconos
 long_top5["icono"] = long_top5["problema"].map(prob_icon)
