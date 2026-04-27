@@ -7,7 +7,7 @@ import pandas as pd
 pptx_ruta = os.path.join("auxiliares/plantillas/plantilla-monitoreo-ensu.pptx")
 prs = Presentation(pptx_ruta)
 
-pptx_salida_ruta = os.path.join("salidas/monitoreo-ensu-cdmx.pptx")
+pptx_salida_ruta = os.path.join("salidas/monitoreo-ensu-cdmx" + "-q1-26" +  ".pptx")
 
 # Df valores
 df_ruta = os.path.join("datos/datos_procesados/df_ensu_integra_09_etiq.csv")

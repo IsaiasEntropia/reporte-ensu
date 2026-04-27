@@ -1,11 +1,11 @@
-# Librerías
+# Bibliotecas
 
 from __future__ import annotations
 
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Callable
 
 import pandas as pd
 from pptx import Presentation
@@ -15,6 +15,18 @@ from pptx.dml.color import RGBColor
 # Funciones
 
 # ---------- Especificaciones de layout (posiciones fijas) ----------
+
+@dataclass(frozen=True)
+class TextPeriod:
+    text: Optional[str] = None         # direct text
+    left: int = 0
+    top: int = 0
+    width: int = 0
+    height: int = 0
+    font_size: int = 24
+    bold: bool = False
+    font_name: str = "Atkinson Hyperlegible"
+    font_color: str = "2E4D58"
 
 @dataclass(frozen=True)
 class TextSpec:
@@ -47,8 +59,7 @@ class TopItemSpec:
     fmt: str = "{score}"   # label y score vienen del longtable
 
 
-
-# Ejemplo: 3 textos fijos en un slide (ajusta posiciones)
+# Textos fijos en un slide (ajusta posiciones)
 FIXED_TEXT_FIELDS: List[TextSpec] = [
     TextSpec(col="p_inseg", 
              left=Inches(0.4),
@@ -68,11 +79,32 @@ FIXED_TEXT_FIELDS: List[TextSpec] = [
              top=Inches(4.4), 
              width=Inches(0.85), 
              height=Inches(0.5), 
-             font_size=19),
+             font_size=19)
 ]
 
 
-# Ejemplo: 5 slots fijos para top-5 (imagen + texto debajo)
+TEXT_PERIOD  = [
+    TextPeriod(
+            text="ene-mar 2026",
+            left=Inches(8.00), 
+            top=Inches(0.22), 
+            width=Inches(2.40), 
+            height=Inches(0.50),
+            font_size=15,
+            bold=True)]
+
+TITLE_TEXT_PERIOD  = [
+    TextPeriod(
+            text="ene-mar 2026",
+            left=Inches(5.85), 
+            top=Inches(3.75), 
+            width=Inches(2.40), 
+            height=Inches(0.50), 
+            font_size=18,
+            bold=True)]
+
+
+# Slots fijos para top-5 (imagen + texto debajo)
 TOP5_SLOTS: List[TopItemSpec] = [
     TopItemSpec(
         img_left=Inches(4.5), img_top=Inches(1.65), img_width=Inches(0.44), img_height=Inches(0.44),
@@ -101,7 +133,7 @@ TOP5_SLOTS: List[TopItemSpec] = [
     ),
 ]
 
-# ---------- Helpers de dibujo ----------
+# ---------- Helpers de dibujo ---------- #
 
 def _add_text(slide, text: str, *, left, top, width, height, font_size, bold, font_name, font_color):
     box = slide.shapes.add_textbox(left, top, width, height)
@@ -150,6 +182,7 @@ def build_topn_by_id(
         out[_id] = g.to_dict(orient="records")
     return out
 
+  
 # ---------- Render principal (una pasada por slides) ----------
 
 def render_slides_for_ids(
@@ -162,6 +195,10 @@ def render_slides_for_ids(
     sort_by_id: bool = False,          # orden de slides contra df_main
     fixed_text_fields: List[TextSpec] = FIXED_TEXT_FIELDS,
     top_slots: List[TopItemSpec] = TOP5_SLOTS,
+    #periodo: str,
+    text_period: List[TextPeriod ] = TEXT_PERIOD,
+    title_text_period: List[TextPeriod ] = TITLE_TEXT_PERIOD,
+    
     # columnas del longtable
     long_score_col: str = "score",
     long_image_col: str = "image",
@@ -170,6 +207,7 @@ def render_slides_for_ids(
     img_dir: Optional[Path] = None,     # si image en df_long es nombre relativo
 ) -> Presentation:
     
+    #Valida que exista el id_col
     if id_col not in df_main.columns:
         raise ValueError(f"df_main no tiene '{id_col}'. Tiene: {list(df_main.columns)}")
 
@@ -182,11 +220,13 @@ def render_slides_for_ids(
     if sort_by_id:
         work = work.sort_values(by=id_col, kind="mergesort")
 
+    # Validar que hay suficientes slides
     needed = len(work)
     available = len(prs.slides) - start_slide
     if available < needed:
         raise IndexError(f"No hay suficientes slides: necesitas {needed} desde {start_slide}, hay {available}.")
-
+    
+    # Valida
     top_by_id = build_topn_by_id(
         df_long,
         id_col=id_col,
@@ -196,10 +236,35 @@ def render_slides_for_ids(
         ascending=top_ascending,
     )
 
-    # Una pasada por slides
+
+    #### ===== Una pasada por slides  ===== ###
+    
+    # Agregar sola,ente en una 
+    slide = prs.slides[0]
+    for ti in title_text_period:
+        _add_text(
+        slide,
+        ti.text,
+        left=ti.left, top=ti.top, width=ti.width, height=ti.height,
+        font_size= ti.font_size, bold=ti.bold, font_name=ti.font_name,
+        font_color=ti.font_color )
+
+    #### ===== Comienza el loop para todas las slides  ===== ###
+    
     for i, row in enumerate(work.to_dict(orient="records")):
         the_id = row[id_col]
         slide = prs.slides[start_slide + i]
+
+        # ---- Textos fijos (periodo) ----
+        for per in text_period:
+            _add_text(
+                slide,
+                per.text,
+                left=per.left, top=per.top, width=per.width, height=per.height,
+                font_size=per.font_size, bold=per.bold, font_name=per.font_name,
+                font_color=per.font_color,
+            )
+
 
         # ---- Textos fijos (df_main) ----
         for spec in fixed_text_fields:
@@ -310,5 +375,3 @@ def upload_pptx_oauth(
         status, resp = req.next_chunk()
 
     return resp
-
-

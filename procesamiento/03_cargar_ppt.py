@@ -10,7 +10,7 @@ FOLDER_ID = os.getenv("DRIVE_FOLDER_ID")
 
 ###
 
-pptx_salida_ruta = os.path.join("auxiliares/plantillas/monitoreo-ensu-cdmx.pptx")
+pptx_salida_ruta = os.path.join("salidas/monitoreo-ensu-cdmx" + "-q1-26" +  ".pptx")
 
 resp = upload_pptx_oauth(
      pptx_salida_ruta,
